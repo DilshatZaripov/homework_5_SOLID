@@ -1,4 +1,4 @@
-# Архитектура проекта NumberGuessGame
+# Архитектура проекта homework_5_SOLID
 
 ## Описание
 
@@ -72,7 +72,7 @@ homework_5_SOLID/
 │       └── InputParser.cs
 │
 ├── Program.cs
-└── NumberGuessGame.csproj
+└── homework_5_SOLID.csproj
 ```
 
 ---
