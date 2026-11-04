@@ -1,6 +1,6 @@
 ﻿using homework_5_SOLID.Domain.Contracts.Settings;
 using homework_5_SOLID.Domain.Models;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace homework_5_SOLID.Infrastructure.Persistence
 {
@@ -22,12 +22,13 @@ namespace homework_5_SOLID.Infrastructure.Persistence
         public GameSettings GetGameSettings()
         {
             var settingsJson = File.ReadAllText(_settingsFile);
-            return JsonConvert.DeserializeObject<GameSettings>(settingsJson) ?? GetDefaultGameSettings();
+            return JsonSerializer.Deserialize<GameSettings>(settingsJson) ?? GetDefaultGameSettings();
         }
 
         public void Save(GameSettings settings)
         {
-            var settingsJson = JsonConvert.SerializeObject(settings, Formatting.Indented);
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            var settingsJson = JsonSerializer.Serialize(settings, options);
             File.WriteAllText(_settingsFile, settingsJson);
         }
     }
