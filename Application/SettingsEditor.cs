@@ -2,6 +2,7 @@
 using homework_5_SOLID.Domain.Contracts.Settings;
 using homework_5_SOLID.Domain.Contracts.UI;
 using homework_5_SOLID.Domain.Models;
+using homework_5_SOLID.Infrastructure.Parsing;
 
 namespace homework_5_SOLID.Application
 {
@@ -25,37 +26,31 @@ namespace homework_5_SOLID.Application
                 switch (input)
                 {
                     case 1:
-                        if (!int.TryParse(_inputReader.Read(), out int newMaxAttempts))
-                            break;
+                        int newMaxAttempts;
+                        try { newMaxAttempts = InputParser.ParseInt(_inputReader.Read()); }
+                        catch (ArgumentException) { break; }
 
-                        try
-                        {
-                            settings = settings with { MaxAttempts = newMaxAttempts };
-                        }
+                        try { settings = settings with { MaxAttempts = newMaxAttempts }; }
                         catch (ArgumentException) { break; }
 
                         menuModel = BuildSettingsMenuModel(settings);
                         break;
                     case 2:
-                        if (!int.TryParse(_inputReader.Read(), out int newMaxValue))
-                            break;
+                        int newMaxValue;
+                        try { newMaxValue = InputParser.ParseInt(_inputReader.Read()); }
+                        catch (ArgumentException) { break; }
                         
-                        try
-                        {
-                            settings = settings with { MaxValue = newMaxValue };
-                        }
+                        try { settings = settings with { MaxValue = newMaxValue }; }
                         catch (ArgumentException) { break; }
 
                         menuModel = BuildSettingsMenuModel(settings);
                         break;
                     case 3:
-                        if (!int.TryParse(_inputReader.Read(), out int newMinValue))
-                            break;
+                        int newMinValue;
+                        try { newMinValue = InputParser.ParseInt(_inputReader.Read()); }
+                        catch (ArgumentException) { break; }
 
-                        try
-                        {
-                            settings = settings with { MinValue = newMinValue };
-                        }
+                        try { settings = settings with { MinValue = newMinValue }; }
                         catch (ArgumentException) { break; }
 
                         menuModel = BuildSettingsMenuModel(settings);

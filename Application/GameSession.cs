@@ -4,6 +4,7 @@ using homework_5_SOLID.Domain.Contracts.Settings;
 using homework_5_SOLID.Domain.Contracts.UI;
 using homework_5_SOLID.Domain.Models;
 using homework_5_SOLID.Domain.Services;
+using homework_5_SOLID.Infrastructure.Parsing;
 
 namespace homework_5_SOLID.Application
 {
@@ -27,8 +28,9 @@ namespace homework_5_SOLID.Application
             {
                 _gameUI.ShowPrompt(attemptsCounter + 1, settings.MaxAttempts);
 
-                if (!int.TryParse(_inputReader.Read(), out int guess))
-                    continue;
+                int guess;
+                try { guess = InputParser.ParseInt(_inputReader.Read()); }
+                catch (ArgumentException) { continue; }
 
                 attemptsCounter++;
                 var guessResult = GuessChecker.Check(targetNumber, guess);
