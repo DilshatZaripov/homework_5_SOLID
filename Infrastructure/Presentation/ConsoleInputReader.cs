@@ -6,12 +6,7 @@ namespace homework_5_SOLID.Infrastructure.Presentation
     {
         public string Read()
         {
-            string? result = null;
-            while (result == null)
-            {
-                result = Console.ReadLine();
-            }
-            return result;
+            return Console.ReadLine() ?? string.Empty;
         }
     }
 }
