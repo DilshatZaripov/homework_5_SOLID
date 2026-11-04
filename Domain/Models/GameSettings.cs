@@ -1,7 +1,18 @@
 ﻿namespace homework_5_SOLID.Domain.Models
 {
+    /// <summary>
+    /// Настройка игры
+    /// </summary>
     public sealed record GameSettings
     {
+        /// <summary>
+        /// Конструктор с валидацией данных
+        /// </summary>
+        /// <param name="minValue">Минимальное значение загадываемого числа</param>
+        /// <param name="maxValue">Максимальное значение загадываемого числа</param>
+        /// <param name="maxAttempts">Максимальное число попыток</param>
+        /// <exception cref="ArgumentException">Выбрасывается, если <paramref name="maxAttempts"/> меньше 1
+        /// или <paramref name="minValue"/> больше либо равно <paramref name="maxValue"/></exception>
         public GameSettings(int minValue, int maxValue, int maxAttempts)
         {
             if (maxAttempts < 1)
