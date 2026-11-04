@@ -1,19 +1,44 @@
 ﻿using homework_5_SOLID.Domain.Contracts.UI;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using homework_5_SOLID.Domain.Models;
 
 namespace homework_5_SOLID.Application
 {
-    public class Application(IMenuUI ui, GameSession gameSession, SettingsEditor settingsEditor)
+    public class Application(IMenuUI mainMenuUI, GameSession gameSession, SettingsEditor settingsEditor)
     {
-        private readonly IMenuUI        _ui = ui;
-        private readonly GameSession    _gameSession = gameSession;
+        private readonly IMenuUI _menuUI = mainMenuUI;
+        private readonly GameSession _gameSession = gameSession;
         private readonly SettingsEditor _settingsEditor = settingsEditor;
 
         public void Run()
         {
+            var menuModel = new MenuModel(
+                "Угадай число",
+                [
+                    "Начать игру",
+                    "Настройки",
+                    "Выход"
+                ]
+            );
 
+            while (true)
+            {
+                var input = _menuUI.ShowMenu(menuModel);
+
+                switch (input)
+                {
+                    case 1:
+                        _gameSession.StartGame();
+                        break;
+                    case 2:
+                        _settingsEditor.OpenSettings();
+                        break;
+                    case 3:
+                        return;
+                    default:
+                        _menuUI.ShowMessage("Введите корректный пункт меню 1-3");
+                        break;
+                }
+            }
         }
     }
 }
