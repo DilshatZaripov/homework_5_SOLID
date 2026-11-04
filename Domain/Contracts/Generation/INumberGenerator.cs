@@ -1,4 +1,4 @@
-﻿namespace homework_5_SOLID.Domain.Contracts
+﻿namespace homework_5_SOLID.Domain.Contracts.Generation
 {
     public interface INumberGenerator
     {

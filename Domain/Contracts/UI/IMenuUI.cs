@@ -12,6 +12,5 @@ namespace homework_5_SOLID.Domain.Contracts.UI
         /// <param name="model">Модель данных меню</param>
         /// <returns>Номер пункта меню (1-based)</returns>
         int ShowMenu(MenuModel model);
-        void ShowMessage(string message);
     }
 }

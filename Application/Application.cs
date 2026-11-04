@@ -34,9 +34,6 @@ namespace homework_5_SOLID.Application
                         break;
                     case 3:
                         return;
-                    default:
-                        _menuUI.ShowMessage("Введите корректный пункт меню 1-3");
-                        break;
                 }
             }
         }

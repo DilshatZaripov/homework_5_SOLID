@@ -1,7 +1,9 @@
-﻿using homework_5_SOLID.Domain.Contracts;
+﻿using homework_5_SOLID.Domain.Contracts.Generation;
+using homework_5_SOLID.Domain.Contracts.Input;
 using homework_5_SOLID.Domain.Contracts.Settings;
 using homework_5_SOLID.Domain.Contracts.UI;
 using homework_5_SOLID.Domain.Models;
+using homework_5_SOLID.Domain.Services;
 
 namespace homework_5_SOLID.Application
 {
@@ -24,15 +26,11 @@ namespace homework_5_SOLID.Application
             while (true)
             {
                 _gameUI.ShowPrompt(++attemptsCounter, settings.MaxAttempts);
-                var guess = _inputReader.Read();
 
-                EGuessResult guessResult;
-                if (guess == targetNumber)
-                    guessResult = EGuessResult.Guessed;
-                else if (guess < targetNumber)
-                    guessResult = EGuessResult.Less;
-                else
-                    guessResult = EGuessResult.More;
+                if (int.TryParse(_inputReader.Read(), out int guess))
+                    continue;
+
+                var guessResult = GuessChecker.Check(targetNumber, guess);
 
                 switch (guessResult)
                 {

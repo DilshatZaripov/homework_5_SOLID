@@ -3,7 +3,7 @@
     /// <summary>
     /// Модель данных для отображения меню
     /// </summary>
-    public record MenuModel
+    public sealed record MenuModel
     {
         /// <summary>
         /// Конструктор с валидацией данных

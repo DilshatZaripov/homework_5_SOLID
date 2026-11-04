@@ -1,4 +1,4 @@
-﻿using homework_5_SOLID.Domain.Contracts;
+﻿using homework_5_SOLID.Domain.Contracts.Input;
 using homework_5_SOLID.Domain.Contracts.Settings;
 using homework_5_SOLID.Domain.Contracts.UI;
 using homework_5_SOLID.Domain.Models;
@@ -25,39 +25,39 @@ namespace homework_5_SOLID.Application
                 switch (input)
                 {
                     case 1:
-                        _settingsUI.ShowMessage("Введите новое значение для максимальных попыток:");
-                        int newMaxAttempts = _inputReader.Read();
-                        if (newMaxAttempts < 1)
-                        {
-                            _settingsUI.ShowMessage("Максимальные попытки не могут быть меньше 1");
+                        if (!int.TryParse(_inputReader.Read(), out int newMaxAttempts))
                             break;
-                        }
 
-                        settings = settings with { MaxAttempts = newMaxAttempts };
+                        try
+                        {
+                            settings = settings with { MaxAttempts = newMaxAttempts };
+                        }
+                        catch (ArgumentException) { break; }
+
                         menuModel = BuildSettingsMenuModel(settings);
                         break;
                     case 2:
-                        _settingsUI.ShowMessage("Введите новое значение для максимального значения:");
-                        int newMaxValue = _inputReader.Read();
-                        if (newMaxValue <= settings.MinValue)
-                        {
-                            _settingsUI.ShowMessage("Максимальное значение должно быть больше минимального");
+                        if (!int.TryParse(_inputReader.Read(), out int newMaxValue))
                             break;
+                        
+                        try
+                        {
+                            settings = settings with { MaxValue = newMaxValue };
                         }
+                        catch (ArgumentException) { break; }
 
-                        settings = settings with { MaxValue = newMaxValue };
                         menuModel = BuildSettingsMenuModel(settings);
                         break;
                     case 3:
-                        _settingsUI.ShowMessage("Введите новое значение для минимального значения:");
-                        int newMinValue = _inputReader.Read();
-                        if (newMinValue >= settings.MaxValue)
-                        {
-                            _settingsUI.ShowMessage("Минимальное значение должно быть меньше максимального");
+                        if (!int.TryParse(_inputReader.Read(), out int newMinValue))
                             break;
-                        }
 
-                        settings = settings with { MinValue = newMinValue };
+                        try
+                        {
+                            settings = settings with { MinValue = newMinValue };
+                        }
+                        catch (ArgumentException) { break; }
+
                         menuModel = BuildSettingsMenuModel(settings);
                         break;
                     case 4:
@@ -69,9 +69,6 @@ namespace homework_5_SOLID.Application
                         return;
                     case 6:
                         return;
-                    default:
-                        _settingsUI.ShowMessage("Введите корректный пункт меню 1-6");
-                        break;
                 }
             }
         }
