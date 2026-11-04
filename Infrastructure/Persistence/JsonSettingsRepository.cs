@@ -29,6 +29,12 @@ namespace homework_5_SOLID.Infrastructure.Persistence
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
             var settingsJson = JsonSerializer.Serialize(settings, options);
+
+            var settingsDirectory = Path.GetDirectoryName(_settingsFile);
+
+            if (!Directory.Exists(settingsDirectory))
+                Directory.CreateDirectory(settingsDirectory);
+
             File.WriteAllText(_settingsFile, settingsJson);
         }
     }

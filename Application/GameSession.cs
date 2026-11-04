@@ -46,7 +46,7 @@ namespace homework_5_SOLID.Application
                             _gameUI.ShowLose(targetNumber, settings.MaxAttempts);
                             return;
                         }
-                        _gameUI.ShowResult(guessResult, attemptsCounter, settings.MaxAttempts);
+                        _gameUI.ShowResult(guessResult, guess);
                         break;
                 }
             }

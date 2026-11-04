@@ -10,7 +10,7 @@ namespace homework_5_SOLID.Infrastructure.Presentation
     {
         private readonly IInputReader _inputReader = inputReader;
 
-        private readonly int _width = 30;
+        private readonly int _width = 40;
 
         public int ShowMenu(MenuModel model)
         {
@@ -31,17 +31,21 @@ namespace homework_5_SOLID.Infrastructure.Presentation
         {
             StringBuilder builder = new();
             builder.AppendLine(new string('*', _width));
-            builder.AppendLine();
-            builder.Append(new string(' ', (_width - model.Title.Length) / 2));
-            builder.AppendLine(model.Title);
-            builder.AppendLine();
+            builder.AppendLine($"*{new string(' ', _width - 2)}*");
+            int horizontalOffset = (_width - model.Title.Length) / 2 - 1;
+            builder.AppendLine(
+                $"*{new string(' ', horizontalOffset)}" +
+                $"{model.Title}" +
+                $"{new string(' ', _width - horizontalOffset - model.Title.Length - 2)}*");
+            builder.AppendLine($"*{new string(' ', _width - 2)}*");
             builder.AppendLine(new string('*', _width));
             builder.AppendLine();
             for (int i = 1; i <= model.Items.Count; i++)
             {
-                builder.AppendLine($"{i}. {model.Items[i - 1]}");
+                builder.AppendLine($" {i}. {model.Items[i - 1]}");
             }
-            builder.AppendLine("Введите пункт меню:");
+            builder.AppendLine();
+            builder.Append("Введите пункт меню и нажмите Enter:");
 
             return builder.ToString();
         }
