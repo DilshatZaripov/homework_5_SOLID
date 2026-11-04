@@ -25,11 +25,12 @@ namespace homework_5_SOLID.Application
             var attemptsCounter = 0;
             while (true)
             {
-                _gameUI.ShowPrompt(++attemptsCounter, settings.MaxAttempts);
+                _gameUI.ShowPrompt(attemptsCounter + 1, settings.MaxAttempts);
 
-                if (int.TryParse(_inputReader.Read(), out int guess))
+                if (!int.TryParse(_inputReader.Read(), out int guess))
                     continue;
 
+                attemptsCounter++;
                 var guessResult = GuessChecker.Check(targetNumber, guess);
 
                 switch (guessResult)
