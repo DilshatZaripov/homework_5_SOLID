@@ -26,7 +26,11 @@ namespace homework_5_SOLID.Application
             var attemptsCounter = 0;
             while (true)
             {
-                _gameUI.ShowPrompt(attemptsCounter + 1, settings.MaxAttempts);
+                _gameUI.ShowPrompt(
+                    attemptsCounter + 1,
+                    settings.MaxAttempts,
+                    settings.MinValue,
+                    settings.MaxValue);
 
                 int guess;
                 try { guess = InputParser.ParseInt(_inputReader.Read()); }

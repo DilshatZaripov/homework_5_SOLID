@@ -4,7 +4,7 @@ namespace homework_5_SOLID.Domain.Contracts.UI
 {
     public interface IGameUI
     {
-        void ShowPrompt(int currentAttempt, int maxAttempts);
+        void ShowPrompt(int currentAttempt, int maxAttempts, int minValue, int maxValue);
         void ShowResult(EGuessResult result, int guessNumber);
         void ShowWin(int targetNumber, int attemptsUsed);
         void ShowLose(int targetNumber, int maxAttempts);

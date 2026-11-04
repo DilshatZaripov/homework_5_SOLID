@@ -9,11 +9,13 @@ namespace homework_5_SOLID.Infrastructure.Presentation
         private static readonly int _width = 40;
 
 
-        public void ShowPrompt(int currentAttempt, int maxAttempts)
+        public void ShowPrompt(int currentAttempt, int maxAttempts, int minValue, int maxValue)
         {
             Console.Clear();
             Console.WriteLine(BuildHeader("Угадай загаданное число"));
-            Console.WriteLine(BuildFooter([$"Попытка {currentAttempt}/{maxAttempts}"]));
+            Console.WriteLine(BuildFooter([
+                $"Попытка {currentAttempt}/{maxAttempts}",
+                $"{minValue}.....{maxValue}"]));
         }
 
         public void ShowResult(EGuessResult result, int guessNumber)
