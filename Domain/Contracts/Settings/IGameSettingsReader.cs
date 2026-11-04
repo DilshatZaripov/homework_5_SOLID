@@ -5,5 +5,6 @@ namespace homework_5_SOLID.Domain.Contracts.Settings
     public interface IGameSettingsReader
     {
         GameSettings GetGameSettings();
+        GameSettings GetDefaultGameSettings();
     }
 }
